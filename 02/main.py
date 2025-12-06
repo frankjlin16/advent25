@@ -59,11 +59,13 @@ def find_invalid_id(first, last):
         # If left half of first ID is greater than right half of
         # last ID, there are no solutions in range.
         if lhalf_first > rhalf_last:
+            print("None")  # NOTE: For DEBUG only
             return
 
         # If right half of first ID is greater than left half of
         # last ID, there are no solutions in range.
         if rhalf_first > lhalf_last:
+            print("None")  # NOTE: For DEBUG only
             return
 
         start: int = rhalf_first if rhalf_first > lhalf_first else lhalf_first
