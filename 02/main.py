@@ -43,12 +43,22 @@ def find_invalid_id(first, last):
         return
     elif is_odd(len(first)):
         print("First is odd")  # NOTE: DEBUG
+        half_len = int(len(last) / 2)
+        lhalf_last = int(last[:half_len])
+        rhalf_last = int(last[half_len:])
+        print(lhalf_last, rhalf_last)  # NOTE: DEBUG
         # TODO: Implement
         pass
     elif is_odd(len(last)):
         print("Last is odd")  # NOTE: DEBUG
-        # TODO: Implement
-        pass
+        half_len = int(len(first) / 2)
+        start = int(first[:half_len])  # First half will always be start
+        end = 10**half_len - 1
+        print(start, end)  # NOTE: DEBUG
+        for pattern in range(start, end+1):
+            invalid_id = pattern * 10**half_len + pattern
+            if invalid_id >= int(first):
+                add_to_answer(invalid_id)
     else:
         half_len = int(len(first) / 2)
         lhalf_first = int(first[:half_len])
