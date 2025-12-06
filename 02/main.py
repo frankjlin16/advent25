@@ -50,20 +50,28 @@ def find_invalid_id(first, last):
         # TODO: Implement
         pass
     else:
-        print("Good range")
         half_len = int(len(first) / 2)
-        lhalf_first = first[:half_len]
-        rhalf_first = first[half_len:]
-        lhalf_last = last[:half_len]
-        rhalf_last = last[half_len:]
-        print(lhalf_first, rhalf_first, lhalf_last, rhalf_last)
+        lhalf_first = int(first[:half_len])
+        rhalf_first = int(first[half_len:])
+        lhalf_last = int(last[:half_len])
+        rhalf_last = int(last[half_len:])
 
         # If left half of first ID is greater than right half of
         # last ID, there are no solutions in range.
         if lhalf_first > rhalf_last:
             return
 
-        pass
+        # If right half of first ID is greater than left half of
+        # last ID, there are no solutions in range.
+        if rhalf_first > lhalf_last:
+            return
+
+        start: int = rhalf_first if rhalf_first > lhalf_first else lhalf_first
+        end: int = rhalf_last
+
+        print("Good range")
+        print(lhalf_first, rhalf_first, lhalf_last, rhalf_last)
+        print(start, end)
 
 
 def gift_shop(input):
