@@ -36,6 +36,17 @@ def find_invalid_id(first, last):
     if is_odd(len(first)) and is_odd(len(last)):
         print("None")  # NOTE: For DEBUG only
         return
+    elif is_odd(len(first)):
+        print("First is odd")  # NOTE: DEBUG
+        # TODO: Implement
+        pass
+    elif is_odd(len(last)):
+        print("Last is odd")  # NOTE: DEBUG
+        # TODO: Implement
+        pass
+    else:
+        print("Good range")
+        pass
 
 
 def gift_shop(input):
