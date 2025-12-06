@@ -39,7 +39,7 @@ def find_invalid_id(first, last):
     # If the length of first and last ID are odd, there are no
     # solutions in range; therefore, returns
     if is_odd(len(first)) and is_odd(len(last)):
-        print("None")  # NOTE: For DEBUG only
+        print("Both odd")  # NOTE: For DEBUG only
         return
     elif is_odd(len(first)):
         print("First is odd")  # NOTE: DEBUG
@@ -59,21 +59,21 @@ def find_invalid_id(first, last):
         # If left half of first ID is greater than right half of
         # last ID, there are no solutions in range.
         if lhalf_first > rhalf_last:
-            print("None")  # NOTE: For DEBUG only
             return
 
         # If right half of first ID is greater than left half of
         # last ID, there are no solutions in range.
         if rhalf_first > lhalf_last:
-            print("None")  # NOTE: For DEBUG only
             return
 
         start: int = rhalf_first if rhalf_first > lhalf_first else lhalf_first
         end: int = rhalf_last
 
-        print("Good range")
-        print(lhalf_first, rhalf_first, lhalf_last, rhalf_last)
-        print(start, end)
+        for pattern in range(start, end+1):
+            if pattern > lhalf_last:
+                return
+            invalid_id = pattern * 10**half_len + pattern
+            add_to_answer(invalid_id)
 
 
 def gift_shop(input):
