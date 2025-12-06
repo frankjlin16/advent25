@@ -30,9 +30,14 @@ def is_odd(num):
     return True
 
 
+def add_to_answer(num: int):
+    global ans
+    ans += num
+
+
 def find_invalid_id(first, last):
     # If the length of first and last ID are odd, there are no
-    # invalid IDs in range; therefore, returns
+    # solutions in range; therefore, returns
     if is_odd(len(first)) and is_odd(len(last)):
         print("None")  # NOTE: For DEBUG only
         return
@@ -46,6 +51,18 @@ def find_invalid_id(first, last):
         pass
     else:
         print("Good range")
+        half_len = int(len(first) / 2)
+        lhalf_first = first[:half_len]
+        rhalf_first = first[half_len:]
+        lhalf_last = last[:half_len]
+        rhalf_last = last[half_len:]
+        print(lhalf_first, rhalf_first, lhalf_last, rhalf_last)
+
+        # If left half of first ID is greater than right half of
+        # last ID, there are no solutions in range.
+        if lhalf_first > rhalf_last:
+            return
+
         pass
 
 
@@ -55,8 +72,10 @@ def gift_shop(input):
     for i in ranges:
         firstID = i.split("-")[0]
         lastID = i.split("-")[1]
-        print(firstID, lastID)  # NOTE: For DEBUG only
+        print("______________________")
+        print("Ranges:", firstID, lastID)  # NOTE: For DEBUG only
         find_invalid_id(firstID, lastID)
 
 
 gift_shop(sample)
+print("\n\n##################\nAnswer:", ans)
