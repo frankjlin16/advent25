@@ -15,13 +15,37 @@ input = (
 ans = 0
 
 
-def gift_shop(sample):
+def is_odd(num):
+    """Check if number is odd.
+
+    Args:
+        num (int): input number.
+
+    Returns:
+        boolean: returns True if `num` is odd, False if even.
+    """
+    if num % 2 == 0:
+        return False
+
+    return True
+
+
+def find_invalid_id(first, last):
+    # If the length of first and last ID are odd, there are no
+    # invalid IDs in range; therefore, returns
+    if is_odd(len(first)) and is_odd(len(last)):
+        print("None")  # NOTE: For DEBUG only
+        return
+
+
+def gift_shop(input):
     ranges = input.split(",")
 
     for i in ranges:
         firstID = i.split("-")[0]
         lastID = i.split("-")[1]
-        print(firstID, lastID)
+        print(firstID, lastID)  # NOTE: For DEBUG only
+        find_invalid_id(firstID, lastID)
 
 
 gift_shop(sample)
