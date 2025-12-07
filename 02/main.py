@@ -12,7 +12,6 @@ input = (
     "26439-45395,95-136,747698990-747770821,984992-1022864,34-47,"
     "360832-469125,277865-333851,2281-3344,2841977-2953689,29330524-29523460"
 )
-ans = 0
 
 
 def is_odd(num):
@@ -39,16 +38,15 @@ def find_invalid_id(first, last):
     # If the length of first and last ID are odd, there are no
     # solutions in range; therefore, returns
     if is_odd(len(first)) and is_odd(len(last)):
-        print("Both odd")  # NOTE: For DEBUG only
         return
     elif is_odd(len(first)):
-        print("First is odd")  # NOTE: DEBUG
         half_len = int(len(last) / 2)
-        lhalf_last = int(last[:half_len])
-        rhalf_last = int(last[half_len:])
-        print(lhalf_last, rhalf_last)  # NOTE: DEBUG
-        # TODO: Implement
-        pass
+        start = 10 ** (half_len - 1)
+        end = lhalf_last = int(last[:half_len])
+        for pattern in range(start, end + 1):
+            invalid_id = pattern * 10**half_len + pattern
+            if invalid_id <= int(last):
+                add_to_answer(invalid_id)
     elif is_odd(len(last)):
         half_len = int(len(first) / 2)
         start = int(first[:half_len])  # First half will always be start
@@ -60,28 +58,17 @@ def find_invalid_id(first, last):
     else:
         half_len = int(len(first) / 2)
         lhalf_first = int(first[:half_len])
-        rhalf_first = int(first[half_len:])
         lhalf_last = int(last[:half_len])
-        rhalf_last = int(last[half_len:])
 
-        # If left half of first ID is greater than right half of
-        # last ID, there are no solutions in range.
-        if lhalf_first > rhalf_last:
-            return
-
-        # If right half of first ID is greater than left half of
-        # last ID, there are no solutions in range.
-        if rhalf_first > lhalf_last:
-            return
-
-        start: int = rhalf_first if rhalf_first > lhalf_first else lhalf_first
-        end: int = rhalf_last
+        start: int = lhalf_first
+        end: int = lhalf_last
 
         for pattern in range(start, end + 1):
             if pattern > lhalf_last:
                 return
             invalid_id = pattern * 10**half_len + pattern
-            add_to_answer(invalid_id)
+            if invalid_id >= int(first) and invalid_id <= int(last):
+                add_to_answer(invalid_id)
 
 
 def gift_shop(input):
@@ -90,10 +77,12 @@ def gift_shop(input):
     for i in ranges:
         firstID = i.split("-")[0]
         lastID = i.split("-")[1]
-        print("______________________")
-        print("Ranges:", firstID, lastID)  # NOTE: For DEBUG only
         find_invalid_id(firstID, lastID)
 
 
-gift_shop(sample)
-print("\n\n##################\nAnswer:", ans)
+# ans = 0
+# gift_shop(sample)
+# print("Sample:", ans)
+ans = 0
+gift_shop(input)
+print("Answer:", ans)
